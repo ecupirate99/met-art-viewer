@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Met Museum Voice Art Viewer</title>
+    <meta name="description" content="A voice-activated web app to search and view beautiful art from The Metropolitan Museum of Art Collection." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+    <header class="gallery-header">
+      <div class="header-inner">
+        <h1>The Met Collection</h1>
+        <p>A Curated Voice Experience</p>
+      </div>
+    </header>
+
+    <main class="gallery-main">
+      <section class="controls" aria-label="Voice Controls">
+        <button id="mic-btn" class="mic-button" aria-label="Start Voice Recognition">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="mic-icon"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" x2="12" y1="19" y2="22"></line></svg>
+          <span class="btn-text">Tap to Speak</span>
+        </button>
+        <div class="action-buttons">
+          <button id="btn-departments" class="action-btn">Explore Departments</button>
+          <button id="btn-artists" class="action-btn">Famous Artists</button>
+        </div>
+        <div id="status" class="status-text">Try saying: "Show me oil paintings by Van Gogh from 1889"</div>
+      </section>
+
+      <section id="results" class="results-grid" aria-live="polite">
+        <!-- Artwork items will be injected here -->
+      </section>
+      
+      <div id="loading" class="loading-spinner hidden">
+        <div class="spinner"></div>
+      </div>
+      
+      <div id="scroll-target" class="scroll-target"></div>
+    </main>
+
+    <!-- Carousel Modal -->
+    <div id="carousel-modal" class="modal hidden">
+      <div class="modal-content">
+        <button id="modal-close" class="modal-close" aria-label="Close modal">&times;</button>
+        <div class="carousel-container">
+          <button id="carousel-prev" class="carousel-btn prev-btn" aria-label="Previous image">&#10094;</button>
+          <img id="carousel-image" src="" alt="Artwork View" class="carousel-image">
+          <button id="carousel-next" class="carousel-btn next-btn" aria-label="Next image">&#10095;</button>
+        </div>
+        <div class="carousel-indicators" id="carousel-indicators"></div>
+      </div>
+    </div>
+
+    <!-- List Modal (for Departments & Artists) -->
+    <div id="list-modal" class="modal hidden">
+      <div class="list-modal-content">
+        <button id="list-modal-close" class="modal-close list-close" aria-label="Close modal">&times;</button>
+        <h2 id="list-modal-title" class="list-modal-title">Select</h2>
+        <ul id="list-modal-ul" class="list-modal-ul">
+          <!-- List items injected here -->
+        </ul>
+      </div>
+    </div>
+
+    <footer class="gallery-footer">
+      <p>Data provided by The Metropolitan Museum of Art Collection API.</p>
+    </footer>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
