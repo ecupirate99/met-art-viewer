@@ -66,19 +66,28 @@ if (SpeechRecognition) {
 
   recognition.onspeechend = () => {
     recognition.stop();
-    micBtn.classList.remove('listening');
-    micBtn.querySelector('.btn-text').textContent = 'Tap to Speak';
   };
 
   recognition.onerror = (event) => {
     recognition.stop();
-    micBtn.classList.remove('listening');
-    micBtn.querySelector('.btn-text').textContent = 'Tap to Speak';
     statusText.textContent = `Error occurred: ${event.error}`;
   };
 
+  recognition.onend = () => {
+    micBtn.classList.remove('listening');
+    micBtn.querySelector('.btn-text').textContent = 'Tap to Speak';
+  };
+
   micBtn.addEventListener('click', () => {
-    recognition.start();
+    if (micBtn.classList.contains('listening')) {
+      recognition.stop();
+    } else {
+      try {
+        recognition.start();
+      } catch (e) {
+        console.error(e);
+      }
+    }
   });
 } else {
   micBtn.disabled = true;
@@ -428,4 +437,3 @@ btnDepartments.addEventListener('click', async () => {
     fetchInitialResults(queryParams.toString(), 'portraits', 'strict');
   });
 });
-
